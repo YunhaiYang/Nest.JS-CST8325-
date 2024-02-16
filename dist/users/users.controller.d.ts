@@ -1,11 +1,11 @@
 import { UsersService } from './users.service';
-import { User } from './users.module';
+import { User } from './users.entity';
 export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
-    findAll(): User[];
-    findOne(id: string): User;
-    create(user: User): void;
-    update(id: string, user: User): void;
-    delete(id: string): void;
+    findAll(): Promise<User[]>;
+    findById(id: number): Promise<User | undefined>;
+    create(createUserDto: User): Promise<User>;
+    update(id: number, updateUserDto: Partial<User>): Promise<User | undefined>;
+    remove(id: number): Promise<void>;
 }

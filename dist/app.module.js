@@ -12,12 +12,27 @@ const users_controller_1 = require("./users/users.controller");
 const users_service_1 = require("./users/users.service");
 const posts_controller_1 = require("./posts/posts.controller");
 const posts_service_1 = require("./posts/posts.service");
+const typeorm_1 = require("@nestjs/typeorm");
+const users_entity_1 = require("./users/users.entity");
+const posts_entity_1 = require("./posts/posts.entity");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [
+            typeorm_1.TypeOrmModule.forRoot({
+                type: 'mysql',
+                host: 'localhost',
+                port: 3306,
+                username: 'root',
+                password: 'root',
+                database: 'social_media',
+                entities: [users_entity_1.User, posts_entity_1.Post],
+                synchronize: true,
+            }),
+            typeorm_1.TypeOrmModule.forFeature([users_entity_1.User, posts_entity_1.Post]),
+        ],
         controllers: [users_controller_1.UsersController, posts_controller_1.PostsController],
         providers: [users_service_1.UsersService, posts_service_1.PostsService],
     })
